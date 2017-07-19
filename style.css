@@ -10,7 +10,7 @@ fieldset {
 
 #logo {
   color: #373F51;
-  font-size: 30px;
+  font-size: 50px;
 }
 
 #logo img {
@@ -19,5 +19,10 @@ fieldset {
 }
 
 #wrapper {
+  text-align: center;
+  width: 100%;
+}
 
+fieldset {
+  margin: auto;
 }
