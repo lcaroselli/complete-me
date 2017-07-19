@@ -4,18 +4,19 @@ body {
 }
 
 fieldset {
-  border: 2px solid #373F51;
+  border: none;
   width: 50%;
 }
 
 #logo {
   color: #373F51;
   font-size: 50px;
+  margin-bottom: 20px;
 }
 
 #logo img {
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
 }
 
 #wrapper {
@@ -25,4 +26,30 @@ fieldset {
 
 fieldset {
   margin: auto;
+}
+
+input {
+  font-size: 16px;
+  height: 30px;
+  margin-bottom: 20px;
+  width: 340px;
+}
+
+button {
+  background-color: #58A4B0;
+  border: none;
+  color: #1B1B1E;
+  font-size: 16px;
+  height: 30px;
+  width: 340px;
+}
+
+button:hover {
+  background-color: #1B1B1E;
+  color: #58A4B0;
+  cursor: pointer;
+}
+
+#suggestions {
+  display: none;
 }
