@@ -15,7 +15,7 @@ describe('Trie functionality', () => {
     });
 
     it ('should have a root', () => {
-      expect(completeMe.root).to.equal(null);
+      expect(completeMe.root).to.deep.equal(new Node());
     });
 
     it ('should be able to insert a word and root should be a Node', () => {
@@ -24,7 +24,7 @@ describe('Trie functionality', () => {
       expect(completeMe.root).to.be.instanceOf(Node);
     });
 
-    it ('should be able to insert a word and root should have children', () => {
+    it.skip('should be able to insert a word and root should have children', () => {
       completeMe.insert('apple');
 
       expect(completeMe.root.children.a.letter).to.be.equal('a');
