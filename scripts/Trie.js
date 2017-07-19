@@ -2,46 +2,69 @@ import Node from './Node.js';
 
 export default class Trie {
   constructor(root) {
-    if (this.root === undefined) {
-      this.root = null
-    } else {
-      this.root = new Node();
-    }
+    this.root = new Node();
+    this.wordCount = 0;
   };
 
   insert(string) {
-    const node = new Node();
+    let currentNode = this.root;
+    let input = [...string.toLowerCase()];
 
-    if(!this.root) {
-      this.root = node;
+    if(!currentNode) {
+      currentNode = new Node();
     }
 
-    [...string].forEach((el) => {
-      if(!this.root.children[el]) {
-        this.root.children[el] = new Node();
-        this.root.children[el].letter = [el];
-        this.root = this.root.children[el];
+    input.forEach((el) => {
+      if(!currentNode.children[el]) {
+        currentNode.children[el] = new Node(el);
       }
+      currentNode = currentNode.children[el]; //!!!! ASK NICK --
     })
-    console.log(JSON.stringify(this.root, null, 4));
+
+    if(!currentNode.isWord) {
+      currentNode.isWord = true;
+      this.wordCount++
+    }
   }
 
-  // insert(data) {
-  //   const node = new Node()
-  //
-  //   if (!this.root) {
-  //     this.root = node;
-  //   }
-  //
-  //   let letters = [...data];
-  //   let currentNode = this.root;
-  //
-  //   for(let i = 0; i < letters.length; i++) {
-  //     currentNode.children[letters[i]] = new Node();
-  //     currentNode.children[letters[i]].letter = letters[i];
-  //     currentNode = currentNode.children[letters[i]];
-  //   }
-  //   console.log(JSON.stringify(this.root, null, 4));
-  // }
+  //Insert takes a string (full letter) and then breaks that word down into an array
+  //for each individual element in that array (or letter) we want to start at the root node and build children nodes off of those individual letters
+  //if that child doesn't exist, then make a node for that child letter
 
-};
+
+  count() {
+    return this.wordCount;
+  }
+
+  suggest(input) {
+    let suggestions = [];
+
+    //if the input matches data in our suggestions array...
+    //then return that array to the user
+
+    //deconstruct to traverse the tree
+
+    //everytime you hit the end of a word you add that to the suggestions array
+
+    // EXAMPLE : completion.suggest("piz")
+    //    RETURNS  => ["pize", "pizza", "pizzeria", "pizzicato", "pizzle"]
+
+    //everytime suggest is triggered, UI 'Did you mean ' + suggestion array to DOM
+  }
+
+  populate(dictionary) {
+    dictionary.forEach(word => {
+      this.insert(word);
+    })
+  }
+
+  select(substring) {
+    // completion.suggest("piz")
+    // => ["pize", "pizza", "pizzeria", "pizzicato", "pizzle", ...]
+    //
+    // completion.select(pizzeria")
+    //
+    // completion.suggest("piz")
+    // => ["pizzeria", "pize", "pizza", "pizzicato", "pizzle", ...]
+  }
+}
