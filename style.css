@@ -1,0 +1,23 @@
+body {
+  background-color: #D8DBE2;
+  font-family: 'Roboto', sans-serif;
+}
+
+fieldset {
+  border: 2px solid #373F51;
+  width: 50%;
+}
+
+#logo {
+  color: #373F51;
+  font-size: 30px;
+}
+
+#logo img {
+  height: 50px;
+  width: 50px;
+}
+
+#wrapper {
+
+}
