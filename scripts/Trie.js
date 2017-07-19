@@ -85,13 +85,13 @@ export default class Trie {
     })
   }
 
-  select(substring) {
-    // completion.suggest("piz")
-    // => ["pize", "pizza", "pizzeria", "pizzicato", "pizzle", ...]
-    //
-    // completion.select(pizzeria")
-    //
-    // completion.suggest("piz")
-    // => ["pizzeria", "pize", "pizza", "pizzicato", "pizzle", ...]
+  select(word) {
+    let wordArray = [...word];
+    let currentNode = this.root;
+
+    for(let i = 0; i < wordArray.length; i++) {
+      currentNode = currentNode.children[wordArray[i]];
+    }
+    currentNode.frequency++
   }
 };
