@@ -38,7 +38,9 @@ function clearDOM() {
 function dropDownSuggestions() {
   if ($(userInput).val() === '') {
     clearDOM();
-  } else {
+  }
+  else {
+    clearDOM();
     filterSuggestions();
   }
 }
@@ -51,7 +53,7 @@ function filterSuggestions() {
   suggestionsBox.style.display = "block";
   submitButtonStyle();
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 15 && suggestions.length; i++) {
     if(suggestions[i] !== undefined) {
       $('#suggestions-array').prepend(`<p><button class="suggestion-button">${suggestions[i]}</button></p>`);
     }
