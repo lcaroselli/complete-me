@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -83,26 +83,6 @@ class Node {
 
 /***/ }),
 /* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Trie__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Node__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__words__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__words___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__words__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__UI__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__UI___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__UI__);
-
-
-
-
-
-let searchTrie = new __WEBPACK_IMPORTED_MODULE_0__Trie__["a" /* default */]();
-
-
-/***/ }),
-/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -129,11 +109,11 @@ class Trie {
     let currentNode = this.root;
     let input = [...string.toLowerCase()];
 
-    input.forEach((el) => {
-      if(!currentNode.children[el]) {
-        currentNode.children[el] = new __WEBPACK_IMPORTED_MODULE_0__Node_js__["a" /* default */](el);
+    input.forEach((letter) => {
+      if(!currentNode.children[letter]) {
+        currentNode.children[letter] = new __WEBPACK_IMPORTED_MODULE_0__Node_js__["a" /* default */](letter);
       }
-      currentNode = currentNode.children[el];
+      currentNode = currentNode.children[letter];
     })
 
     if(!currentNode.isWord) {
@@ -143,11 +123,11 @@ class Trie {
   }
 
   suggest(string) {
-    let word = [...string.toLowerCase()];
+    let input = [...string.toLowerCase()];
     let currentNode = this.root;
     let suggestions = [];
 
-    word.forEach((letter) => {
+    input.forEach((letter) => {
       currentNode = currentNode.children[letter];
     });
 
@@ -168,7 +148,7 @@ class Trie {
     };
 
     if (currentNode && currentNode.isWord) {
-      suggestions.push({name: string, frequency: currentNode.frequency, timeStamp: currentNode.timeStamp})
+      suggestions.push({name: string, frequency: currentNode.frequency, timeStamp: currentNode.timeStamp});
     }
 
     if (currentNode) {
@@ -195,14 +175,13 @@ class Trie {
     currentNode.frequency++;
     currentNode.timeStamp = Date.now();
   }
-
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Trie;
 ;
 
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -275125,13 +275104,32 @@ module.exports = [
 ];
 
 /***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Trie__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Node__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__words__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__words___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__words__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__UI__ = __webpack_require__(4);
+
+
+
+
+
+let searchTrie = new __WEBPACK_IMPORTED_MODULE_0__Trie__["a" /* default */]();
+
+
+/***/ }),
 /* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Node__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Trie__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__words__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Trie__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__words__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__words___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__words__);
 
 
@@ -275139,6 +275137,7 @@ module.exports = [
 
 // Global Variables
 const newTree = new __WEBPACK_IMPORTED_MODULE_1__Trie__["a" /* default */]();
+const submitButton = document.getElementById('submit-button');
 const suggestionsBox = document.getElementById('suggestions-array');
 const suggestionsText = document.getElementById('suggestions');
 const userInput = $('#user-input');
@@ -275158,7 +275157,8 @@ $(userInput).on('keyup', dropDownSuggestions);
 
 //Functions
 function clearDOM() {
-  $('button').remove();
+  $('.suggestion-button').remove();
+  submitButtonDefault();
   suggestionsText.style.display = "none";
   suggestionsBox.style.display = "none";
 }
@@ -275177,15 +275177,48 @@ function filterSuggestions() {
 
   suggestionsText.style.display = "block";
   suggestionsBox.style.display = "block";
+  submitButtonStyle();
 
   for (let i = 0; i < 10; i++) {
     if(suggestions[i] !== undefined) {
-      $('#suggestions-array').prepend(`<p><button>${suggestions[i]}</button></p>`)
+      $('#suggestions-array').prepend(`<p><button class="suggestion-button">${suggestions[i]}</button></p>`)
     }
   }
 }
 
+function submitButtonDefault() {
+  submitButton.style.opacity = "0.3";
+  submitButton.onmouseover = function() {
+    this.style.backgroundColor = "#E63946";
+    this.style.color = "#F1FAEE";
+    this.style.cursor = "default";
+  }
+}
+
+function submitButtonStyle() {
+  submitButton.style.opacity = "1";
+  submitButton.style.cursor = "pointer";
+  submitButton.onmouseover = function() {
+    this.style.backgroundColor = "#F1FAEE";
+    this.style.border = "1px solid #1B1B1E"
+    this.style.color = "#E63946";
+  }
+  submitButton.onmouseout = function() {
+    this.style.backgroundColor = "#E63946";
+    this.style.color = "#F1FAEE";
+  }
+}
+
 //when a full word button is pressed, have that word appear in the input and a submit button become non-opaque and un-disabled
+
+
+function selectWord(e) {
+  let selected = e.target.innerHTML;
+  searchTrie.select(selected);
+  filterList();
+}
+
+$('aside').on('click', '.suggestions', selectWord);
 
 
 /***/ })
