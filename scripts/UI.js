@@ -23,6 +23,7 @@ function populateDictionary() {
 //Events
 $(userInput).on('keyup', dropDownSuggestions);
 $(suggestionsBox).on('click', '.suggestion-button', selectSuggestion);
+$(suggestionsBox).on('click', '.suggestion-button', sortSelected);
 $(submitButton).on('click', submittedWordsList);
 
 
@@ -61,7 +62,6 @@ function selectSuggestion(e) {
   let selected = e.target;
   let selectedText = $(selected).text();
   $(userInput).val(selectedText);
-  sortSelected();
 }
 
 function submitButtonDefault() {
@@ -94,5 +94,8 @@ function submittedWordsList() {
   $(submissionBox).append(`<p><button class="suggestion-button-2">${userInput.val()}</button></p>`);
 }
 
-
-//Select method to organize drop down box
+function sortSelected (e) {
+  let selectedWord = e.target.innerHTML;
+  newTree.select(selectedWord);
+  filterSuggestions();
+}
