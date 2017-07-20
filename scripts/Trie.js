@@ -6,15 +6,25 @@ export default class Trie {
     this.wordCount = 0;
   };
 
+  count() {
+    return this.wordCount;
+  }
+
+  populate(dictionary) {
+    dictionary.forEach(word => {
+      this.insert(word);
+    })
+  }
+
   insert(string) {
     let currentNode = this.root;
     let input = [...string.toLowerCase()];
 
-    input.forEach((el) => {
-      if(!currentNode.children[el]) {
-        currentNode.children[el] = new Node(el);
+    input.forEach((letter) => {
+      if(!currentNode.children[letter]) {
+        currentNode.children[letter] = new Node(letter);
       }
-      currentNode = currentNode.children[el];
+      currentNode = currentNode.children[letter];
     })
 
     if(!currentNode.isWord) {
@@ -24,11 +34,11 @@ export default class Trie {
   }
 
   suggest(string) {
-    let word = [...string.toLowerCase()];
+    let input = [...string.toLowerCase()];
     let currentNode = this.root;
     let suggestions = [];
 
-    word.forEach((letter) => {
+    input.forEach((letter) => {
       currentNode = currentNode.children[letter];
     });
 
@@ -49,7 +59,7 @@ export default class Trie {
     };
 
     if (currentNode && currentNode.isWord) {
-      suggestions.push({name: string, frequency: currentNode.frequency, timeStamp: currentNode.timeStamp})
+      suggestions.push({name: string, frequency: currentNode.frequency, timeStamp: currentNode.timeStamp});
     }
 
     if (currentNode) {
@@ -75,15 +85,5 @@ export default class Trie {
 
     currentNode.frequency++;
     currentNode.timeStamp = Date.now();
-  }
-
-  count() {
-    return this.wordCount;
-  }
-
-  populate(dictionary) {
-  dictionary.forEach(word => {
-    this.insert(word);
-    })
   }
 };

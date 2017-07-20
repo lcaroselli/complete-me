@@ -17,13 +17,15 @@
           <form>
               <input type="text" id="user-input" name="user-input" placeholder="Search for a word"></input>
           </form>
-          <button type="button" id="submit-button" name="submit-button">Submit</button>
         </fieldset>
 
-        <article id="suggestions">Did you mean...<span id="suggestions-array"></span></article>
-      </article>
+        <article id="suggestions">Did you mean...
+        </article>
+        <span id="suggestions-array"></span></article>
+        <button type="button" id="submit-button" name="submit-button" aria-pressed="false">Submit</button>
     </main>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="./dist/bundle.js"></script>
   </body>
 </html>

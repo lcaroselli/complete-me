@@ -3,9 +3,32 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+button {
+  background-color: #58A4B0;
+  border: none;
+  color: #1B1B1E;
+  font-size: 16px;
+  height: 30px;
+  width: 170px;
+}
+
+button:hover {
+  background-color: #1B1B1E;
+  color: #58A4B0;
+  cursor: pointer;
+}
+
 fieldset {
   border: none;
+  margin: auto;
   width: 50%;
+}
+
+input {
+  font-size: 16px;
+  height: 30px;
+  margin-bottom: 20px;
+  width: 340px;
 }
 
 #logo {
@@ -19,37 +42,31 @@ fieldset {
   width: 40px;
 }
 
-#wrapper {
-  text-align: center;
-  width: 100%;
-}
-
-fieldset {
-  margin: auto;
-}
-
-input {
-  font-size: 16px;
+#submit-button {
+  background-color: #E63946;
+  color: #F1FAEE;
+  cursor: default;
   height: 30px;
-  margin-bottom: 20px;
+  margin: 15px auto;
+  opacity: 0.3;
   width: 340px;
-}
-
-button {
-  background-color: #58A4B0;
-  border: none;
-  color: #1B1B1E;
-  font-size: 16px;
-  height: 30px;
-  width: 340px;
-}
-
-button:hover {
-  background-color: #1B1B1E;
-  color: #58A4B0;
-  cursor: pointer;
 }
 
 #suggestions {
   display: none;
+}
+
+#suggestions-array {
+  background-color: #FFFFFF;
+  border: 2px solid #1B1B1E;
+  display: none;
+  height: 300px;
+  margin: 15px auto;
+  overflow: scroll;
+  width: 340px;
+}
+
+#wrapper {
+  text-align: center;
+  width: 100%;
 }
