@@ -61,8 +61,7 @@ function selectSuggestion(e) {
   let selected = e.target;
   let selectedText = $(selected).text();
   $(userInput).val(selectedText);
-  newTree.select(selected);
-  filterSuggestions();
+  sortSelected();
 }
 
 function submitButtonDefault() {
@@ -94,3 +93,6 @@ function submittedWordsList() {
 
   $(submissionBox).append(`<p><button class="suggestion-button-2">${userInput.val()}</button></p>`);
 }
+
+
+//Select method to organize drop down box
