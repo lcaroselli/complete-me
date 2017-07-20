@@ -5,6 +5,8 @@ import words from './words';
 // Global Variables
 const newTree = new Trie();
 const submitButton = document.getElementById('submit-button');
+const submissionBox = document.getElementById('submitted-words');
+const submittedText = document.getElementById('submissions');
 const suggestionsBox = document.getElementById('suggestions-array');
 const suggestionsText = document.getElementById('suggestions');
 const userInput = $('#user-input');
@@ -20,6 +22,8 @@ function populateDictionary() {
 
 //Events
 $(userInput).on('keyup', dropDownSuggestions);
+$(suggestionsBox).on('click', '.suggestion-button', selectSuggestion);
+$(submitButton).on('click', submittedWordsList);
 
 
 //Functions
@@ -48,9 +52,17 @@ function filterSuggestions() {
 
   for (let i = 0; i < 10; i++) {
     if(suggestions[i] !== undefined) {
-      $('#suggestions-array').prepend(`<p><button class="suggestion-button">${suggestions[i]}</button></p>`)
+      $('#suggestions-array').prepend(`<p><button class="suggestion-button">${suggestions[i]}</button></p>`);
     }
   }
+}
+
+function selectSuggestion(e) {
+  let selected = e.target;
+  let selectedText = $(selected).text();
+  $(userInput).val(selectedText);
+  newTree.select(selected);
+  filterSuggestions();
 }
 
 function submitButtonDefault() {
@@ -67,7 +79,7 @@ function submitButtonStyle() {
   submitButton.style.cursor = "pointer";
   submitButton.onmouseover = function() {
     this.style.backgroundColor = "#F1FAEE";
-    this.style.border = "1px solid #1B1B1E"
+    this.style.border = "1px solid #1B1B1E";
     this.style.color = "#E63946";
   }
   submitButton.onmouseout = function() {
@@ -76,13 +88,9 @@ function submitButtonStyle() {
   }
 }
 
-//when a full word button is pressed, have that word appear in the input and a submit button become non-opaque and un-disabled
+function submittedWordsList() {
+  submissionBox.style.display = "block";
+  submittedText.style.display = "block";
 
-
-function selectWord(e) {
-  let selected = e.target.innerHTML;
-  searchTrie.select(selected);
-  filterList();
+  $(submissionBox).append(`<p><button class="suggestion-button-2">${userInput.val()}</button></p>`);
 }
-
-$('aside').on('click', '.suggestions', selectWord);

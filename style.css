@@ -7,9 +7,9 @@ button {
   background-color: #58A4B0;
   border: none;
   color: #1B1B1E;
-  font-size: 16px;
+  font-size: 20px;
   height: 30px;
-  width: 170px;
+  width: 250px;
 }
 
 button:hover {
@@ -24,11 +24,15 @@ fieldset {
   width: 50%;
 }
 
+hr {
+  border: 1.5px inset;
+}
+
 input {
-  font-size: 16px;
+  font-size: 18px;
   height: 30px;
   margin-bottom: 20px;
-  width: 340px;
+  width: 500px;
 }
 
 #logo {
@@ -42,18 +46,33 @@ input {
   width: 40px;
 }
 
+#submissions, #suggestions {
+  display: none;
+}
+
+#submissions p, #suggestions p {
+  font-size: 19px;
+}
+
+#submitted-words {
+  display: none;
+  background-color: #FFFFFF;
+  border: 2px solid #1B1B1E;
+  display: none;
+  height: 300px;
+  margin: 15px auto;
+  overflow: scroll;
+  width: 500px;
+}
+
 #submit-button {
   background-color: #E63946;
   color: #F1FAEE;
   cursor: default;
-  height: 30px;
+  height: 40px;
   margin: 15px auto;
   opacity: 0.3;
-  width: 340px;
-}
-
-#suggestions {
-  display: none;
+  width: 500px;
 }
 
 #suggestions-array {
@@ -63,7 +82,7 @@ input {
   height: 300px;
   margin: 15px auto;
   overflow: scroll;
-  width: 340px;
+  width: 500px;
 }
 
 #wrapper {
